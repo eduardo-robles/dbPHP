@@ -9,9 +9,10 @@ WHERE e.employeeId = c.employeeId
 GROUP BY  c.employeeId
 HAVING SUM(c.employeeId) > 10";
 
-//$query  = "SELECT * FROM Employee LIMIT 3"; //Query #1
+
 $result = mysql_query($query); //Store query in variable $result
 
+  echo "<section id='content'><h2>The information you requested</h2><div id='queries'>";
   echo "<table><thead><tr>"; //begin table
   echo "<th>Employee ID</th>"; //begin header
   echo "<th>First Name</th>";
@@ -23,9 +24,10 @@ $result = mysql_query($query); //Store query in variable $result
 while ($row = mysql_fetch_array($result)) {
     $eID=$row['employeeId'];
     $fname=$row['fname'];//takes variable $row and looks for fname in array and puts it in variable $fname
-    $lname=$row['lname'];//takes variable $row and looks for fname in array and puts it in variable $fname
+    $lname=$row['lname'];
     $phoneNum=$row['phoneNum'];
     $price=$row['price'];
+	$price=number_format($price, 2);
 
 
     echo "<tbody><tr>"; //begin body
@@ -33,11 +35,12 @@ while ($row = mysql_fetch_array($result)) {
     echo "<td>" .$fname. "</td>";
     echo "<td>" .$lname. "</td>";
     echo "<td>" .$phoneNum. "</td>";
-    echo "<td>" .$price. "</td>";
+    echo "<td>$" .$price. "</td>";
     echo "</tr></tbody>";//end body
 
     }
     echo "</table>";//end table
+	echo "</div></section>";
 mysql_free_result($result);
 
 ?>
